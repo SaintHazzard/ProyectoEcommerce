@@ -4,19 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Visualizador de Productos</title>
+    <link rel="stylesheet" href="styles/style.css" />
   </head>
   <body>
+    <div class="header">
+      <h2>Categorias</h2>
+      <ul id="listaCategorias"></ul>
+    </div>
     <div>
       <h2>Lista de Productos</h2>
       <ul id="listaProductos"></ul>
     </div>
-    <div>
-      <h2>Lista de Imágenes</h2>
-      <ul id="listaImagenes"></ul>
-    </div>
-    <div>
-      <h2>Imagen Seleccionada</h2>
-      <img id="imagen" alt="Imagen del producto" />
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" id="closeBtn">&times;</span>
+        <div id="modalContent">
+          
+        </div>
+      </div>
     </div>
     <script src="src/index.js"></script>
   </body>
