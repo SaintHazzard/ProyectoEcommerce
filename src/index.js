@@ -69,13 +69,20 @@ document.addEventListener('DOMContentLoaded', function () {
                     const descripcionProductoElement = document.createElement('div');
                     descripcionProductoElement.classList.add('descripcionProducto');
                     descripcionProductoElement.innerHTML = `<h3>${producto}</h3>
+                                                                    <div class="estrellas">
+                                                                      <i class="bx bxs-star"></i>
+                                                                      <i class="bx bxs-star"></i>
+                                                                      <i class="bx bxs-star"></i>
+                                                                      <i class="bx bxs-star"></i>
+                                                                      <i class="bx bxs-star"></i>
+                                                                    </div>
                                                               <p>
                                                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus tempore
                                                                 soluta maxime velit. Cumque, similique. Reprehenderit, beatae porro
                                                                 ducimus ex ea natus ab molestiae obcaecati unde eligendi dolore rerum
                                                                 itaque.
                                                               </p>
-                                                              <h3>$ 100.000</h3>
+                                                              <h3 class="precio">$ 100.000</h3>
                                                               <button class="obtener agregar">Obtener</button>`;
                     liProducto.appendChild(descripcionProductoElement);
                   })
@@ -112,9 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
   listaProductos.addEventListener('click', function (event) {
     const target = event.target;
 
-    // Verifica si el clic fue en un botón de obtener
     if (target.classList.contains('obtener')) {
-      // Obtén el contenido relacionado con el producto
       const producto = target.closest('.containProduct');
 
       const imagenProducto = producto.querySelector(".contenedorImagen")
@@ -124,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
       ventanaEmergente.innerHTML = '';  // Limpiar el contenido existente
       ventanaEmergente.appendChild(imagenProducto.cloneNode(true));
       ventanaEmergente.appendChild(descripcionProducto.cloneNode(true));
-      // Crear elementos de entrada y botón
+
       ventanaEmergente.querySelector(`.obtener`).style.display = 'none'
 
       const contenedorAgregar = document.createElement('div')
@@ -138,14 +143,25 @@ document.addEventListener('DOMContentLoaded', function () {
       contenedorAgregar.appendChild(inputText);
       contenedorAgregar.appendChild(buttonAgregar);
       ventanaEmergente.appendChild(contenedorAgregar)
-      // Muestra la ventana emergente con el contenido del producto
       modal.style.display = 'block';
     }
   });
 
   closeBtn.addEventListener('click', function () {
-    // Cierra la ventana emergente al hacer clic en el botón de cerrar
     modal.style.display = 'none';
   });
 });
 
+let botonMovil = document.getElementById('botonMovil')
+let listaCategorias = document.getElementById('listaCategorias')
+botonMovil.addEventListener('click', function () {
+  listaCategorias.classList.toggle('active')
+
+})
+
+listaCategorias.addEventListener('click', function (event) {
+  const target = event.target;
+  if (target.tagName === 'LI') {
+    listaCategorias.classList.toggle('active')
+  }
+});
