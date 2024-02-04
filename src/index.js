@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
           fetch(`http://localhost:3000/categorias/${categoria}`)
             .then(response => response.json())
             .then(productos => {
+              document.getElementById('categoriaSeleccionada').textContent = categoria
               productos.forEach(producto => {
                 const liProducto = document.createElement('div');
                 liProducto.id = producto.toLowerCase()
@@ -32,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
                   .then(response => response.json())
                   .then(imagenes => {
                     imagenes.forEach(nombreImagen => {
+
                       const liImagen = document.createElement('img');
                       const rutaImagen = `public/images/${categoria}/${producto}/${nombreImagen}`;
                       liImagen.src = rutaImagen;
@@ -39,29 +41,33 @@ document.addEventListener('DOMContentLoaded', function () {
                       liImagen.style.width = "100px";
                       liImagen.style.height = "100px";
                       listaImagenesElement.appendChild(liImagen)
-                      liImagen.addEventListener('click', function () {
+                      liImagen.addEventListener('mouseover', function () {
                         const contenedorProducto = document.getElementById(producto.toLowerCase())
                         const imagenProducto = contenedorProducto.querySelector('.imagenProducto')
                         // Al hacer clic en una imagen, muestra la imagen seleccionada
                         let rutaImagen = liImagen.src
                         imagenProducto.src = rutaImagen;
-                        imagenProducto.style.width = "500px"
-                        imagenProducto.style.width = "500px"
+                        // imagenProducto.style.width = "500px"
+                        // imagenProducto.style.width = "500px"
 
                       });
                     })
                     liProducto.appendChild(listaImagenesElement);
 
 
-                    
+
                     // Crear el contenedor de la imagen del producto y la descripción
+                    const contImagen = document.createElement('div')
+                    contImagen.classList.add(`contenedorImagen`)
                     const imagenProductoElement = document.createElement('img');
-                    imagenProductoElement.src = `/public/images/Portatiles/${producto}/${imagenes[0]}`
+
+                    imagenProductoElement.src = `/public/images/${categoria}/${producto}/${imagenes[0]}`
                     imagenProductoElement.classList.add(`imagenProducto`)
-                    liProducto.appendChild(imagenProductoElement);
+                    contImagen.appendChild(imagenProductoElement)
+                    liProducto.appendChild(contImagen);
 
                     const descripcionProductoElement = document.createElement('div');
-                    descripcionProductoElement.id = 'descripcionProducto';
+                    descripcionProductoElement.classList.add('descripcionProducto');
                     descripcionProductoElement.innerHTML = `<h3>${producto}</h3>
                                                               <p>
                                                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus tempore
@@ -69,7 +75,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                                                 ducimus ex ea natus ab molestiae obcaecati unde eligendi dolore rerum
                                                                 itaque.
                                                               </p>
-                                                              <button class="obtener">Obtener</button>`;
+                                                              <h3>$ 100.000</h3>
+                                                              <button class="obtener agregar">Obtener</button>`;
                     liProducto.appendChild(descripcionProductoElement);
                   })
 
@@ -86,7 +93,59 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         listaCategorias.appendChild(li);
+
       });
+      document.querySelector('#listaCategorias li:first-child').click();
     })
+
     .catch(error => console.error('Error al obtener la lista de productos:', error));
 });
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  const listaProductos = document.getElementById('listaProductos');
+  const modal = document.getElementById('modal');
+  const closeBtn = document.getElementById('closeBtn');
+  const modalContent = document.getElementById('modalContent');
+
+  listaProductos.addEventListener('click', function (event) {
+    const target = event.target;
+
+    // Verifica si el clic fue en un botón de obtener
+    if (target.classList.contains('obtener')) {
+      // Obtén el contenido relacionado con el producto
+      const producto = target.closest('.containProduct');
+
+      const imagenProducto = producto.querySelector(".contenedorImagen")
+      const descripcionProducto = producto.querySelector('.descripcionProducto');
+
+      const ventanaEmergente = document.getElementById('modalContent');
+      ventanaEmergente.innerHTML = '';  // Limpiar el contenido existente
+      ventanaEmergente.appendChild(imagenProducto.cloneNode(true));
+      ventanaEmergente.appendChild(descripcionProducto.cloneNode(true));
+      // Crear elementos de entrada y botón
+      ventanaEmergente.querySelector(`.obtener`).style.display = 'none'
+
+      const contenedorAgregar = document.createElement('div')
+      contenedorAgregar.classList.add('containAgregar')
+      const inputText = document.createElement('input');
+      inputText.setAttribute('type', 'text');
+
+      const buttonAgregar = document.createElement('button');
+      buttonAgregar.textContent = `Agregar`
+      buttonAgregar.classList.add('agregar');
+      contenedorAgregar.appendChild(inputText);
+      contenedorAgregar.appendChild(buttonAgregar);
+      ventanaEmergente.appendChild(contenedorAgregar)
+      // Muestra la ventana emergente con el contenido del producto
+      modal.style.display = 'block';
+    }
+  });
+
+  closeBtn.addEventListener('click', function () {
+    // Cierra la ventana emergente al hacer clic en el botón de cerrar
+    modal.style.display = 'none';
+  });
+});
+
