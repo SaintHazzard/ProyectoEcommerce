@@ -224,6 +224,10 @@
   background-color: #45a049; /* Color verde más oscuro */
 }
 
+.active {
+  display: block;
+}
+
 @media (width < 500px) {
   .containProduct {
     position: relative;
@@ -273,8 +277,8 @@
     justify-content: center;
   }
   .modal-content {
-    max-height: 720px;
-    top: 42%;
+    max-height: 750px;
+    top: 23.4rem;
   }
   #modal-content .contenedorImagen {
     height: 700px;
@@ -303,6 +307,7 @@
     flex-direction: column;
   }
 
+  
   /* .descripcionProducto h3 {
     padding-left: 0;
 } */

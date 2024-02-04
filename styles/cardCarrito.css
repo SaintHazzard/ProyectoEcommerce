@@ -1,0 +1,76 @@
+#modalCarrito .modal-content {
+  display: flex;
+  flex-direction: column;
+  background-color: #f2f2f2;
+  /* background-image: url(../public/404.jpg); */
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 60%;
+  height: 80%;
+}
+
+#modalContent .cardCarrito .contenedorImagen {
+  width: 280px;
+  height: 180px;
+}
+
+.cardCarrito p {
+  display: none;
+}
+
+#modalCarrito #modalContent {
+  width: 100%;
+  height: 100%;
+  gap: 1rem;
+  overflow: auto;
+  padding-bottom: 1rem;
+}
+
+.cardCarrito {
+  position: relative;
+  width: 99%;
+  height: fit-content;
+  display: flex;
+  /* justify-content: space-around; */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#modalContent .cardCarrito .contenedorImagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: scale-down;
+}
+
+.total {
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: row;
+  /* position: absolute; */
+  height: 15%;
+  width: 99%;
+  /* padding: 1rem; */
+  bottom: 0;
+  margin-bottom: 0;
+  justify-content: space-between;
+  align-self: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.total h2 {
+  height: fit-content;
+  text-align: center;
+  align-self: center;
+}
+
+@media (width < 500px) {
+  .active2 {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+  #modalCarrito .modal-content {
+    width: 90%;
+    height: 90%;
+  }
+}
