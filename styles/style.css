@@ -1,46 +1,141 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
 * {
-  padding: 0;
   margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
   box-sizing: border-box;
+  /* border-style: dotted; */
+  font-family: "Poppins", sans-serif;
+  /* font-style: oblique; */
+  /* color: #ffffff; */
+  text-decoration: none;
+  font-weight: 500;
+  -webkit-font-smoothing: none;
 }
 
 .header {
+  position: fixed;
   display: flex;
   width: 100vw;
-  height: 10vh;
-  background-color: aqua;
+  flex-direction: column;
+  background-color: #333;
+  padding: 20px;
+  color: #fff;
+  text-align: center;
+  z-index: 10;
+  align-items: center;
+}
+#listaCategorias::-webkit-scrollbar {
+  width: 10px;
 }
 
-#listaCategorias {
-  width: 80%;
+#botonMovil {
+  display: none;
+  position: absolute;
+  left: 1.7rem;
+}
+
+#listaCategorias::-webkit-scrollbar-thumb {
+  background: #b2b2b2;
+  border-radius: 50px;
+}
+#listaCategorias::-webkit-scrollbar-track {
+  background: #fdfdfd;
+  border-radius: 50px;
+}
+
+#carrito {
+  position: absolute;
+  right: 2rem;
+}
+.allBody {
+  padding-top: 9rem;
+}
+#categoriaSeleccionada {
+  text-align: center;
+}
+
+.listCategorias {
+  white-space: nowrap;
+  overflow-x: auto;
+  width: 50%;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  /* align-self: center; */
+  /* margin: auto; */
+  justify-content: space-between;
 }
 
-ul {
+#listaCategorias li {
+  font-size: 1rem;
+  list-style: none;
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  border-radius: 2rem;
+  transition: background 0.5s ease-in;
+  transition: background 0.5s ease-in;
+}
+
+#listaCategorias li:hover {
+  background-color: #ddd;
+  color: black;
+  outline: auto;
+  /* transition: ; */
+}
+
+#listaCategorias li:active {
+  background-color: #ee0606;
+  /* transition: ; */
+}
+#categoriaSeleccionada {
+  font-size: 3rem;
+  padding: 1rem;
+}
+#listaProductos {
   display: flex;
   flex-direction: column;
   text-decoration: none;
   list-style: none;
   gap: 1rem;
+  align-items: center;
 }
 .containProduct {
   display: flex;
   align-items: center;
   width: 90vw;
-  height: 400px;
-  background-color: bisque;
+  background-color: #fff;
+  /* border: 1px solid #000; */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  gap: 1rem;
 }
 
 .listaImagenes {
   display: flex;
   flex-direction: column;
+  padding: 0.5rem 0 0.5rem 0.5rem;
+  gap: 0.5rem;
+}
+.contenedorImagen {
+  display: flex;
+  width: 100%; /* Ajusta el ancho del contenedor al 100% del contenedor padre o del viewport */
+  height: auto; /* La altura se ajustará automáticamente para mantener la proporción original */
+  overflow: hidden;
+  justify-content: center;
 }
 
+#modalContent .contenedorImagen {
+  height: 400px;
+}
 .imagenProducto {
-  max-width: 55%;
-  max-height: 90%;
+  width: 450px; /* La imagen ocupará el 100% del ancho del contenedor */
+  height: 400px; /* La imagen ocupará el 100% de la altura del contenedor */
+  object-fit: contain; /* Ajusta la imagen para cubrir el contenedor manteniendo la proporción y recortando si es necesario */
+  display: block;
 }
 
 .modal {
@@ -54,6 +149,7 @@ ul {
 }
 
 .modal-content {
+  margin-top: 5rem;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -62,11 +158,12 @@ ul {
   padding: 20px;
   border-radius: 5px;
 }
-
 #modalContent {
+  height: 10%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 
 .close-btn {
@@ -79,14 +176,36 @@ ul {
 
 .descripcionProducto p {
   width: 100%;
+  text-align: justify;
+}
+.bxs-star {
+  font-size: 2rem;
+  color: #f4f408;
+  /* border: 1px solid #000; */
+}
+.descripcionProducto {
+  margin-right: 1rem;
+  color: #025d08;
 }
 
+.descripcionProducto .precio {
+  padding: 1rem;
+}
+.descripcionProducto .obtener {
+  margin-left: 1rem;
+}
+
+.containProduct:last-of-type {
+  margin-bottom: 1.5rem;
+}
 .containAgregar {
-  width: 98%;
+  display: flex;
+  flex-direction: row;
+  align-self: flex-end;
 }
 .agregar {
   display: inline-block;
-  width: 30%;
+  width: fit-content;
   padding: 10px 20px;
   font-size: 16px;
   font-weight: bold;
@@ -103,4 +222,88 @@ ul {
 /* Cambia el color de fondo al pasar el mouse sobre el botón */
 .agregar:hover {
   background-color: #45a049; /* Color verde más oscuro */
+}
+
+@media (width < 500px) {
+  .containProduct {
+    position: relative;
+    flex-wrap: wrap;
+  }
+  #botonMovil {
+    display: block;
+    position: absolute;
+  }
+  .allBody {
+    padding-top: 4rem;
+  }
+  .descripcionProducto {
+    margin-left: 1rem;
+  }
+  .descripcionProducto .obtener {
+    margin-bottom: 1rem;
+  }
+
+  .imagenProducto {
+    width: 200px;
+    height: 200px;
+    transition: all 0.3s ease-in-out;
+    object-fit: contain;
+  }
+
+  .imagenProducto:hover {
+    position: absolute;
+    transform: scale(1.35);
+    transform: translateX(-60px);
+    /* top: 4rem;
+    left: 2rem; */
+    width: 90%;
+    height: auto;
+    /* transform: translateX(200px); */
+  }
+  #modalContent {
+    height: fit-content;
+  }
+  .listaImagenes {
+    margin-left: 0.5rem;
+  }
+  .contenedorImagen {
+    display: flex;
+    width: 62%;
+    height: 20rem; /* La altura se ajustará automáticamente para mantener la proporción original */
+    justify-content: center;
+  }
+  .modal-content {
+    max-height: 720px;
+    top: 42%;
+  }
+  #modal-content .contenedorImagen {
+    height: 700px;
+  }
+  #modalContent .contenedorImagen {
+    height: 240px;
+  }
+  .header {
+    /* height: 400px; */
+  }
+  .listCategorias {
+    display: none;
+  }
+
+  #modalContent .contenedorImagen .imagenProducto:hover {
+    transform: scale(1.35);
+  }
+
+  #categoriaSeleccionada {
+    font-size: 1rem;
+  }
+  .active {
+    height: 300px;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* .descripcionProducto h3 {
+    padding-left: 0;
+} */
 }
