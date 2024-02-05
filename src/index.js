@@ -133,6 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
       contenedorAgregar.classList.add('containAgregar')
       const inputText = document.createElement('input');
       inputText.setAttribute('type', 'text');
+      inputText.placeholder = 'Cantidad'
       inputText.classList.add('cantidad')
 
       const buttonAgregar = document.createElement('button');
@@ -157,6 +158,8 @@ document.addEventListener('DOMContentLoaded', function () {
   closeBtn.addEventListener('click', function () {
     modal.style.display = 'none';
   });
+
+
 });
 
 
@@ -214,7 +217,7 @@ document.addEventListener("DOMContentLoaded", function () {
       carritoCard.appendChild(fotoProducto.cloneNode(true))
       // descripcionProducto.removeChild(descripcionProducto.querySelector('.precio'))
       carritoCard.appendChild(descripcionProducto.cloneNode(true))
-      carritoCard.insertAdjacentHTML("beforeend", "<i id='eliminarProdcto' class='bx bxs-trash-alt' ></i>")
+      carritoCard.insertAdjacentHTML("beforeend", "<i id='eliminarProducto' class='bx bxs-trash-alt' ></i>")
       // carritoCard.appendChild(parrafo)
       // carritoCard.insertAdjacentHTML('beforeend', `<p class='unitario'>Precio unitario : ${descripcionProducto.querySelector(".precio").textContent.match(/\d+/g)}</p>`)
       contenidoCarrito.appendChild(carritoCard)
@@ -236,13 +239,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
       let totalizado = document.querySelector('.totalizado')
       totalizado.innerHTML = `$ ${sumTotal} USD`
+
+
+      
+      let iconoEliminar = document.getElementById('eliminarProducto');
+      console.log(iconoEliminar)
+      // Agrega un evento de clic al icono
+      iconoEliminar.addEventListener('click', function () {
+        // Obtiene el contenedor padre del icono
+        let contenedorPadre = iconoEliminar.closest('.cardCarrito');
+        console.log(contenedorPadre)
+        if (contenedorPadre) {
+          contenedorPadre.remove();
+        }
+      });
     }
 
   })
 
   let btnObtener = document.querySelector(".obtener")
-  // console.log(btnObtener)
-  // botonAgregar = modalContent.querySelector('agregar')
+
 
   botonCarrito.addEventListener("click", function () {
     modalCarrito.classList.toggle('active2');
@@ -254,7 +270,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   closeBtn.addEventListener('click', function () {
     modalCarrito.classList.toggle('active2');
-  }); 
+  });
+
 })
 
 
