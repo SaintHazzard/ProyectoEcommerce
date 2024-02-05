@@ -15,15 +15,32 @@
 }
 
 .cardCarrito p {
-  display: none;
+  width: fit-content;
+  position: absolute;
+  font-size: 1.5rem;
+}
+.cardCarrito .precio {
+  font-size: 1.7rem;
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }
 
+.unitario {
+  color: #025d08;
+  position: absolute;
+  /* bottom: 0; */
+  left: 16rem;
+  /* bottom: 2rem; */
+  bottom: 2rem;
+}
 #modalCarrito #modalContent {
   width: 100%;
   height: 100%;
   gap: 1rem;
   overflow: auto;
   padding-bottom: 1rem;
+  padding-top: 1px;
 }
 
 .cardCarrito {
@@ -62,7 +79,11 @@
   text-align: center;
   align-self: center;
 }
-
+.active2 {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
 @media (width < 500px) {
   .active2 {
     display: flex;
@@ -72,5 +93,24 @@
   #modalCarrito .modal-content {
     width: 90%;
     height: 90%;
+  }
+
+  .descripcionProducto h3 {
+    font-size: 1rem;
+  }
+  .cardCarrito p {
+    width: fit-content;
+    position: absolute;
+    font-size: 0.9rem;
+  }
+  .cardCarrito .precio {
+    font-size: 1rem;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+  .unitario {
+    left: 45%;
+    bottom: 30%;
   }
 }

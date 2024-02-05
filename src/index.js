@@ -25,10 +25,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 const listaImagenesElement = document.createElement('div');
                 listaImagenesElement.classList.add(`listaImagenes`)
 
-
-
-
-
                 fetch(`http://localhost:3000/categorias/${categoria}/${producto}`)
                   .then(response => response.json())
                   .then(imagenes => {
@@ -82,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                                                 ducimus ex ea natus ab molestiae obcaecati unde eligendi dolore rerum
                                                                 itaque.
                                                               </p>
-                                                              <h3 class="precio">$ 100.000</h3>
+                                                              <h3 class="precio">$ ${Math.floor(Math.random() * (400 - 100) + 100)} USD</h3>
                                                               <button class="obtener agregar">Obtener</button>`;
                     liProducto.appendChild(descripcionProductoElement);
                   })
@@ -115,6 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const modal = document.getElementById('modal');
   const closeBtn = document.getElementById('closeBtn');
   const modalContent = document.getElementById('modalContent');
+  const mainModal = document.getElementsByClassName('modal-content');
 
   listaProductos.addEventListener('click', function (event) {
     const target = event.target;
@@ -136,6 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
       contenedorAgregar.classList.add('containAgregar')
       const inputText = document.createElement('input');
       inputText.setAttribute('type', 'text');
+      inputText.classList.add('cantidad')
 
       const buttonAgregar = document.createElement('button');
       buttonAgregar.textContent = `Agregar`
@@ -145,6 +143,15 @@ document.addEventListener('DOMContentLoaded', function () {
       ventanaEmergente.appendChild(contenedorAgregar)
       modal.style.display = 'block';
     }
+    window.addEventListener('click', function (event) {
+      let header = document.querySelector('.header')
+      if (modal.style.display === 'block' && header.contains(event.target)) {
+        modal.style.display = 'none';
+      }
+      if (event.target == modal) {
+        modal.style.display = 'none';
+      }
+    })
   });
 
   closeBtn.addEventListener('click', function () {
@@ -152,16 +159,102 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
+
+
 let botonMovil = document.getElementById('botonMovil')
 let listaCategorias = document.getElementById('listaCategorias')
 botonMovil.addEventListener('click', function () {
   listaCategorias.classList.toggle('active')
-
 })
 
 listaCategorias.addEventListener('click', function (event) {
   const target = event.target;
-  if (target.tagName === 'LI') {
+  if (target.tagName === 'LI' && listaCategorias.classList.contains('active')) {
     listaCategorias.classList.toggle('active')
   }
+
 });
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  let botonCarrito = document.getElementById('carrito')
+  let modalCarrito = document.getElementById('modalCarrito')
+  let botonAgregar = document.querySelector('.agregar')
+  let modalContent = document.getElementsByClassName('containAgregar')
+  const modal = document.getElementById('modal');
+  let modalProducto = document.getElementById('modalContent')
+
+  modalProducto.addEventListener("click", function (event) {
+    let target = event.target
+    if (target.classList.contains('agregar')) {
+      let fotoProducto = modalProducto.querySelector(".contenedorImagen")
+      let descripcionProducto = modalProducto.querySelector(".descripcionProducto")
+      let estrellas = descripcionProducto.querySelector('.estrellas')
+      let inputCantidad = modalProducto.querySelector('.cantidad')
+      let parrafo = descripcionProducto.querySelector('p')
+      let precio = Number(descripcionProducto.querySelector('.precio').textContent.match(/\d+/g))
+      console.log(precio)
+      parrafo.innerHTML = ''
+      if (/^\d+$/.test(inputCantidad.value) && Number(inputCantidad.value) > 0) {
+        console.log('entra')
+        parrafo.innerHTML = `Cantidad: ${inputCantidad.value}`
+        descripcionProducto.querySelector(".precio").innerHTML = `${inputCantidad.value * precio}`
+      } else {
+        parrafo.innerHTML = `Cantidad: ${1}`
+      }
+
+      descripcionProducto.removeChild(estrellas)
+      // descripcionProducto.removeChild(parrafo)
+      let carritoCard = document.createElement('div')
+      carritoCard.classList.add('cardCarrito')
+
+      let contenidoCarrito = modalCarrito.querySelector('#modalContent')
+
+      carritoCard.appendChild(fotoProducto.cloneNode(true))
+      // descripcionProducto.removeChild(descripcionProducto.querySelector('.precio'))
+      carritoCard.appendChild(descripcionProducto.cloneNode(true))
+      carritoCard.insertAdjacentHTML("beforeend", "<i id='eliminarProdcto' class='bx bxs-trash-alt' ></i>")
+      // carritoCard.appendChild(parrafo)
+      // carritoCard.insertAdjacentHTML('beforeend', `<p class='unitario'>Precio unitario : ${descripcionProducto.querySelector(".precio").textContent.match(/\d+/g)}</p>`)
+      contenidoCarrito.appendChild(carritoCard)
+      modal.style.display = 'none'
+
+
+      let valores = contenidoCarrito.querySelectorAll('.precio')
+      let sumTotal = 0
+
+      valores.forEach(num => {
+        // let nCantidad = Number(num.closest('p').textContent.match(/\d+/g).join('')) 
+        // console.log(nCantidad)
+        let contenidoh3 = num.textContent
+
+        let extraido = contenidoh3.match(/\d+/g)
+        num.innerHTML = extraido + " USD"
+        sumTotal += Number(extraido)
+      })
+
+      let totalizado = document.querySelector('.totalizado')
+      totalizado.innerHTML = `$ ${sumTotal} USD`
+    }
+
+  })
+
+  let btnObtener = document.querySelector(".obtener")
+  // console.log(btnObtener)
+  // botonAgregar = modalContent.querySelector('agregar')
+
+  botonCarrito.addEventListener("click", function () {
+    modalCarrito.classList.toggle('active2');
+  })
+
+  closeBtn = modalCarrito.querySelector('.close-btn')
+  const target = event.target;
+
+
+  closeBtn.addEventListener('click', function () {
+    modalCarrito.classList.toggle('active2');
+  }); 
+})
+
+
