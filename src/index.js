@@ -217,7 +217,8 @@ document.addEventListener("DOMContentLoaded", function () {
       carritoCard.appendChild(fotoProducto.cloneNode(true))
       // descripcionProducto.removeChild(descripcionProducto.querySelector('.precio'))
       carritoCard.appendChild(descripcionProducto.cloneNode(true))
-      carritoCard.insertAdjacentHTML("beforeend", "<i id='eliminarProducto' class='bx bxs-trash-alt' ></i>")
+      carritoCard.insertAdjacentHTML("beforeend", "<i class='bx bxs-trash-alt eliminarProducto' ></i>")
+
       // carritoCard.appendChild(parrafo)
       // carritoCard.insertAdjacentHTML('beforeend', `<p class='unitario'>Precio unitario : ${descripcionProducto.querySelector(".precio").textContent.match(/\d+/g)}</p>`)
       contenidoCarrito.appendChild(carritoCard)
@@ -242,16 +243,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-      let iconoEliminar = document.getElementById('eliminarProducto');
-      console.log(iconoEliminar)
+      // let iconoEliminar = document.querySelector('.eliminarProducto');
       // Agrega un evento de clic al icono
-      iconoEliminar.addEventListener('click', function () {
+      window.addEventListener('click', function (event) {
         // Obtiene el contenedor padre del icono
-        let contenedorPadre = iconoEliminar.closest('.cardCarrito');
-        console.log(contenedorPadre)
-        if (contenedorPadre) {
-          contenedorPadre.remove();
+
+        let target = event.target
+        if (target.classList.contains('eliminarProducto')) {
+          let contenedorPadre = target.closest('.cardCarrito');
+          if (contenedorPadre) {
+            contenedorPadre.remove();
+          }
         }
+
       });
     }
 
