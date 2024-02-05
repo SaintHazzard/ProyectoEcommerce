@@ -26,9 +26,18 @@ app.get('/categorias/:categoria', (req, res) => {
   const nombreCategoria = req.params.categoria;
   const rutaCarpetaCategoria = path.join(carpetaImagenes, nombreCategoria);
   const productos = fs.readdirSync(rutaCarpetaCategoria);
+
+
+  const dataDirectory = path.join(__dirname, 'src', `${nombreCategoria}`);
+  if (!fs.existsSync(dataDirectory)) {
+    fs.mkdirSync(dataDirectory);
+  }
+  // Create JSON file for the category
+  const jsonFilePath = path.join(__dirname, 'src', `${nombreCategoria}`, `${nombreCategoria}.json`);
+  fs.writeFileSync(jsonFilePath, JSON.stringify(productos));
+
   res.json(productos);
 });
-
 
 app.get('/categorias/:categoria/:producto', (req, res) => {
   const nombreCategoria = req.params.categoria;
@@ -37,8 +46,12 @@ app.get('/categorias/:categoria/:producto', (req, res) => {
   const rutaCarpetaProducto = path.join(carpetaImagenes, nombreCategoria, nombreProducto);
   const imagenes = fs.readdirSync(rutaCarpetaProducto);
 
-  res.json(imagenes)
-})
+  // Create JSON file for the product
+  const jsonFilePath = path.join(__dirname, 'src', `${nombreCategoria}`, `${nombreProducto}.json`);
+  fs.writeFileSync(jsonFilePath, JSON.stringify(imagenes));
+
+  res.json(imagenes);
+});
 
 
 app.listen(port, () => {

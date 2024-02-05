@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const imagenProducto = document.getElementById('imagenProducto');
 
-  fetch('http://localhost:3000/categorias')
+  fetch('/src/categorias.json')
     .then(response => response.json())
     .then(categorias => {
       categorias.forEach(categoria => {
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
         li.textContent = categoria;
         li.addEventListener('click', function () {
           listaProductos.innerHTML = ""
-          fetch(`http://localhost:3000/categorias/${categoria}`)
+          fetch(`/src/${categoria}/${categoria}.json`)
             .then(response => response.json())
             .then(productos => {
               document.getElementById('categoriaSeleccionada').textContent = categoria
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const listaImagenesElement = document.createElement('div');
                 listaImagenesElement.classList.add(`listaImagenes`)
 
-                fetch(`http://localhost:3000/categorias/${categoria}/${producto}`)
+                fetch(`/src/${categoria}/${producto}.json`)
                   .then(response => response.json())
                   .then(imagenes => {
                     imagenes.forEach(nombreImagen => {
@@ -241,7 +241,7 @@ document.addEventListener("DOMContentLoaded", function () {
       totalizado.innerHTML = `$ ${sumTotal} USD`
 
 
-      
+
       let iconoEliminar = document.getElementById('eliminarProducto');
       console.log(iconoEliminar)
       // Agrega un evento de clic al icono
