@@ -1,0 +1,32 @@
+{
+  "name": "ecommercecampus",
+  "version": "1.0.0",
+  "description": "Proyecto de e-commerce de productos con javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "run": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/SaintHazzard/EcomerceNoApi.git"
+  },
+  "keywords": [
+    "e-commerce",
+    "productos",
+    "image",
+    "campus"
+  ],
+  "author": "Hazzard",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SaintHazzard/EcomerceNoApi/issues"
+  },
+  "homepage": "https://github.com/SaintHazzard/EcomerceNoApi#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7"
+  }
+}
