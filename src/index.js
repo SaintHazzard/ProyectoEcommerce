@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const imagenProducto = document.getElementById('imagenProducto');
 
-  fetch('/src/categorias.json')
+  fetch('src/categorias.json')
     .then(response => response.json())
     .then(categorias => {
       categorias.forEach(categoria => {
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
         li.textContent = categoria;
         li.addEventListener('click', function () {
           listaProductos.innerHTML = ""
-          fetch(`/src/${categoria}/${categoria}.json`)
+          fetch(`src/${categoria}/${categoria}.json`)
             .then(response => response.json())
             .then(productos => {
               document.getElementById('categoriaSeleccionada').textContent = categoria
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const listaImagenesElement = document.createElement('div');
                 listaImagenesElement.classList.add(`listaImagenes`)
 
-                fetch(`/src/${categoria}/${producto}.json`)
+                fetch(`src/${categoria}/${producto}.json`)
                   .then(response => response.json())
                   .then(imagenes => {
                     imagenes.forEach(nombreImagen => {
