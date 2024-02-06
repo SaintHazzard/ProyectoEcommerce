@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     contImagen.classList.add(`contenedorImagen`)
                     const imagenProductoElement = document.createElement('img');
 
-                    imagenProductoElement.src = `/public/images/${categoria}/${producto}/${imagenes[0]}`
+                    imagenProductoElement.src = `public/images/${categoria}/${producto}/${imagenes[0]}`
                     imagenProductoElement.classList.add(`imagenProducto`)
                     contImagen.appendChild(imagenProductoElement)
                     liProducto.appendChild(contImagen);

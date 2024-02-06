@@ -169,8 +169,8 @@
 .close-btn {
   font-size: 3rem;
   position: absolute;
-  top: -2px;
-  right: 5px;
+  top: -1rem;
+  right: 0;
   /* font-size: 20px; */
   cursor: pointer;
 }
